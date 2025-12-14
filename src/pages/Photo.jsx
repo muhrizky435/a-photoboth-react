@@ -146,7 +146,7 @@ export default function PhotoPage() {
       return;
     }
     sessionStorage.setItem("capturedPhotos", JSON.stringify(photos));
-    console.log(JSON.parse(sessionStorage.getItem("capturedPhotos")));
+    // console.log(JSON.parse(sessionStorage.getItem("capturedPhotos")));
     
     navigate(`/editor?frame=${frameParam}`);
   }
@@ -353,9 +353,9 @@ export default function PhotoPage() {
                 </button>
                 <button
                   onClick={goToEditor}
-                  className="w-full py-3 bg-pink-600 rounded-xl hover:bg-pink-700 hover:translate-x-3 transition text-white mt-3"
+                  className="w-full py-3 bg-pink-600 rounded-xl hover:bg-pink-700 hover:scale-105 transition text-white mt-3"
                 >
-                  Continue to Editing -&gt;
+                  Continue to Editing
                 </button>
               </div>
             </div>

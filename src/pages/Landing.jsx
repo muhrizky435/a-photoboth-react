@@ -49,11 +49,11 @@ export default function Landing() {
                 {/* Action Buttons */}
                 <div className="mt-14 flex flex-col sm:flex-row justify-center text-center gap-4 sm:gap-6 z-30">
                     <a
-                        href="/frames"
+                        href="/frame"
                         className="group px-8 py-3 rounded-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white font-bold text-lg shadow-pink-400/40 shadow-lghover:shadow-pink-500/60 transform hover:scale-105 transition-all duration-300 flex items-center gap-3"
                     >
                         <i data-lucide="camera" className="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-                        Mulai Sekarang!
+                        📸 Mulai Sekarang!
                     </a>
 
                     <a

@@ -3,7 +3,7 @@ import Landing from "./pages/Landing";
 import Photo from "./pages/Photo";
 import Frame from "./pages/Frame";
 import Editor from "./pages/Editor";
-// import Album from "./pages/Album";
+import Album from "./pages/Album";
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
         <Route path="/photo" element={<Photo />} />
         <Route path="/frame" element={<Frame />} />
         <Route path="/editor" element={<Editor />} />
-        {/* <Route path="/album" element={<Album />} /> */}
+        <Route path="/album" element={<Album />} />
 
         {/* fallback → seperti Laravel fallback */}
         <Route path="*" element={<Landing />} />

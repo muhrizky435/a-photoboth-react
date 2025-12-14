@@ -512,6 +512,44 @@ export default function EditorPage() {
       link.click();
     };
 
+    // SAVE TO ALBUM
+document.getElementById("saveAlbumBtn").onclick = () => {
+  // sembunyikan border slot
+  const prevBorderVis = slotBorders.map(b => ({
+    stroke: b.stroke,
+    opacity: b.opacity
+  }));
+  slotBorders.forEach(b => b.set({ stroke: null, opacity: 0 }));
+  canvas.renderAll();
+
+  const dataURL = canvas.toDataURL({
+    format: "png",
+    multiplier: 2
+  });
+
+  // restore border
+    slotBorders.forEach((b, i) => b.set(prevBorderVis[i]));
+      canvas.renderAll();
+
+      // ambil album lama
+      const album = JSON.parse(localStorage.getItem("photoAlbum") || "[]");
+
+      album.unshift({
+        id: Date.now(),
+        frame: frameId,
+        image: dataURL,
+        createdAt: new Date().toISOString()
+      });
+
+      localStorage.setItem("photoAlbum", JSON.stringify(album));
+
+      alert("Foto berhasil disimpan ke Album 📸");
+
+      // redirect ke halaman album
+      window.location.href = "/album";
+    };
+
+
 
     // SLOT SELECTOR
     function setActiveSlot(idx) {
@@ -561,12 +599,15 @@ export default function EditorPage() {
           </div>
 
           {/* ACTION BUTTONS */}
-          <div className="mt-6 grid grid-cols-3 gap-4">
+          <div className="mt-6 grid grid-cols-4 gap-4">
             <button id="fitBtn" className="py-2 rounded-xl bg-green-50 text-green-600 font-semibold">
               Fit
             </button>
             <button id="resetBtn" className="py-2 rounded-xl bg-pink-50 text-pink-600 font-semibold">
               Reset
+            </button>
+            <button id="saveAlbumBtn" className="py-2 rounded-xl bg-yellow-400 text-white font-semibold">
+              Save to Album
             </button>
             <button id="downloadBtn" className="py-2 rounded-xl bg-indigo-500 text-white font-semibold">
               Download
@@ -605,10 +646,10 @@ export default function EditorPage() {
             <h3 className="font-bold text-lg text-pink-600 mb-3">Photo Filters</h3>
 
             <div className="grid grid-cols-4 gap-3">
-              {["normal","sepia","grayscale","bright","soft","warm","cool","dreamy"].map(f => (
+              {["normal","sepia","gray","bright","soft","warm","cool","dreamy"].map(f => (
                 <button
                   key={f}
-                  className="filterBtn p-3 rounded-xl bg-gray-100"
+                  className="filterBtn p-3 rounded-xl bg-gray-100 hover:bg-pink-50 text-center"
                   data-filter={f}
                 >
                   {f.toUpperCase()}
@@ -624,7 +665,7 @@ export default function EditorPage() {
             <div className="grid grid-cols-6 gap-2">
               {["🍒","💀","🔥","😎","😍","😭","🎉","🤩","👍","😱","😡","✨","🐣","🌈","🧋","✨","💖","🎀","🐻","⭐","🍓","🌸","💘","💫","🐼","🪽","🌙","💕","🧸","🤍","💐"]
                 .map((e, i) => (
-                <button key={i} className="stickerBtn bg-gray-100 p-3 rounded-xl border border-pink-200">
+                <button key={i} className="stickerBtn bg-gray-100 p-3 rounded-xl border border-pink-200 hover:bg-pink-50">
                   {e}
                 </button>
               ))}
